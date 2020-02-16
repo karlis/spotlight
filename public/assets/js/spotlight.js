@@ -36,17 +36,18 @@
             resultWrapper.addClass('spotlight__results--empty')
             return
         }
-
-        if (shouldUpdateCompletion(
+    
+        let shouldUpdate = shouldUpdateCompletion(
             input.val(),
             inputbg.html(),
-            inputbg.attr('data-autocomplete')))
-        {
+            inputbg.attr('data-autocomplete'))
+
+        if (shouldUpdate) {
             var newCompletion = comepletionPart(
                 input.val(),
                 inputbg.html(),
                 inputbg.attr('data-autocomplete'))
-            inputbg.attr('data-autocomplete', newCompletion)
+            updateCompletion(inputbg, newCompletion)
         }
 
         inputbg.text(input.val()).html()
@@ -67,6 +68,10 @@
             var lastChar = string.charAt(string.length - 1)
             return lastChar + previvousCompletion
         }
+    }
+    
+    function updateCompletion(inputbg, completion) {
+       inputbg.attr('data-autocomplete', completion)
     }
 
     function resetCtrl() {
